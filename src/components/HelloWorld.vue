@@ -1,24 +1,36 @@
 <template>
-  <div class="payment">
-    <h1>Checkout</h1>
-    <div style="justify-content: center; display: grid;">
-    <div v-if="step === 1">
-      <h2>Escolha a opção de pagamento:</h2>
-      <div class="payment-option-container">
-        <div v-for="option in paymentOptions" :key="option.method" class="payment-option">
-          <img :src="option.icon" :alt="option.alt">
-          <button class="payment-buttons" @click="choosePayment(option.method)">{{ option.label }}</button>
+  <v-container>
+
+    <div class="payment">
+      <h1>Checkout</h1>
+      <div style="justify-content: center; display: grid; padding-top: 50px;">
+        <div v-if="step === 1">
+          <h2 class="payment-options-title">Escolha a opção de pagamento:</h2>
+          <div class="payment-option-container">
+            <div v-for="option in paymentOptions" :key="option.method" class="payment-option">
+              <img :src="option.icon" :alt="option.alt">
+              <button class="payment-buttons" @click="choosePayment(option.method)">{{ option.label }}</button>
+            </div>
+          </div>
         </div>
+        <div v-else-if="step === 2">
+          <h2 class="title-information">Preencher informações adicionais:</h2>
+          <component :is="paymentMethodFormComponent" ref="form"></component>
+          <!-- <v-btn class="confirm-credit-payment" @click="confirmPayment"  >Confirmar Pagamento</v-btn> -->
+
+        </div>
+
+        <!-- <div v-else-if="step === 3">
+          <h2 class="title-information">step 3</h2>
+    
+          <button class="back-button" @click="step = 1">Voltar</button>
+
+
+        </div> -->
       </div>
     </div>
-    <div v-else-if="step === 2">
-      <h2 class="title-information">Preencher informações adicionais:</h2>
-      <component :is="paymentMethodFormComponent"></component>
-      <button class="confirm-credit-payment" @click="confirmPayment">Confirmar Pagamento</button>
-    </div>
-    </div>
-    <!-- Adicione outras etapas aqui -->
-  </div>
+
+  </v-container>
 </template>
 
 <script>
@@ -27,33 +39,12 @@ import BoletoForm from './BoletoForm.vue'; // Importar componente para formulár
 import PixForm from './PixForm.vue'; // Importar componente para formulário de Pix
 
 export default {
+  name: 'HelloWorld',
   data() {
     return {
       step: 1,
       paymentMethod: null,
-      creditCard: {
-        number: '',
-        cvv: '',
-        expiryDate: '',
-        cardHolderName: '',
-        cpf: '',
-        installments: 1,
-      },
-      boleto: {
-        cpf: '',
-        name: '',
-        lastName: '',
-        email: '',
-        barcode: '',
-        dueDate: '',
-      },
-      pix: {
-        qrCode: '',
-        expirationTime: '',
-      },
-      products: [],
-      purchaseDate: '',
-      deliveryDate: '',
+      errorMessage: '',
       paymentOptions: [
         {
           method: 'cartao',
@@ -62,7 +53,6 @@ export default {
           alt: 'Ícone de cartão de crédito',
           formComponent: 'CreditCardForm',
           styleClass: 'pix-icon', // Adicionando uma classe CSS para o ícone do Pix
-
         },
         {
           method: 'boleto',
@@ -71,7 +61,6 @@ export default {
           alt: 'Ícone de boleto',
           formComponent: 'BoletoForm',
           styleClass: 'pix-icon', // Adicionando uma classe CSS para o ícone do Pix
-
         },
         {
           method: 'pix',
@@ -80,11 +69,11 @@ export default {
           alt: 'Ícone de Pix',
           formComponent: 'PixForm',
           styleClass: 'pix-icon', // Adicionando uma classe CSS para o ícone do Pix
-
         },
       ],
     };
   },
+
   computed: {
     paymentMethodFormComponent() {
       if (this.paymentMethod) {
@@ -98,45 +87,61 @@ export default {
       this.paymentMethod = method;
       this.step = 2;
     },
-    confirmPayment() {
-      // Lógica para confirmar o pagamento
-      this.step = 3;
-    },
+    // //   confirmPayment() {
+    // //   // Verificar se o formulário é válido
+    // //   if (this.$refs[`form`].validate()) {
+
+    // //     // Se o formulário for válido, avance para o passo 3
+    // //     console.log('Formulário válido');
+    // //     this.step = 3;
+
+    // //   } 
+    // //   else{
+    // //     // Se o formulário não for válido, exiba mensagem
+    // //     console.log('Preencha todo o Formulário ');
+
+    // //   }
+    // // }
   },
+
   components: {
     CreditCardForm,
     BoletoForm,
     PixForm,
   },
-};
+
+
+}
 </script>
 
 <style scoped>
-
-#app > div > div > div > div > div > div:nth-child(1) > img,
-#app > div > div > div > div > div > div:nth-child(2) > img,
-#app > div > div > div > div > div > div:nth-child(3) > img
-{
-  height: 30px!important;
-  width: 30px!important;
+#app>div>div>div>div>div>div:nth-child(1)>img,
+#app>div>div>div.container>div>div>div>div>div:nth-child(2)>img,
+#app>div>div>div>div>div>div:nth-child(3)>img {
+  height: 30px !important;
+  width: 30px !important;
 }
-.payment-option{
+
+.payment-option {
   display: flex;
   padding-bottom: 10px;
 }
-.payment-buttons{
+
+.payment-buttons {
   margin-left: 10px;
   cursor: pointer;
-  
+
 }
-.confirm-credit-payment{ 
+
+.confirm-credit-payment {
   height: 40px;
   cursor: pointer;
   border: 1px solid rgb(0, 0, 0);
   padding: 10px;
   border-radius: 5px;
 }
-.title-information{
+
+.title-information {
   padding-bottom: 20px;
 }
 </style>
