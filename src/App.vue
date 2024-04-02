@@ -1,12 +1,30 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
-  </div>
+  <v-app>
+    <div>
+      <NavBar />
+      <HelloWorld />
+    </div>
+
+   
+  </v-app>
 </template>
+
+<script>
+import NavBar from './components/NavBar.vue'
+import HelloWorld from './components/HelloWorld.vue'
+export default {
+  name: 'AppView',
+  data() {
+    return {
+    }
+  },
+  components: {
+    NavBar,
+    HelloWorld
+  }
+
+}
+</script>
 
 <style lang="scss">
 #app {
@@ -17,16 +35,7 @@
   color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.v-sheet.v-card {
+  border-radius: none;
 }
 </style>
