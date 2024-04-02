@@ -1,49 +1,32 @@
 <template>
-  <div style="text-align: start;">
-    <div class="boleto-information-container">
-      <v-row>
-        <v-col cols="3">
-          <label class="label">CPF:</label>
-        </v-col>
-        <v-col cols="7">
-          <input class="input" type="text" v-model="formData.cpf">
-        </v-col>
-      </v-row>
-    </div>
 
-    <div class="boleto-information-container">
-      <v-row>
-        <v-col cols="3">
-      <label class="label">Nome:</label>
-    </v-col>
-        <v-col cols="7">
-      <input class="input" type="text" v-model="formData.name">
-    </v-col>
-      </v-row>
-    </div>
+  <div>
 
-    <div class="boleto-information-container">
-      <v-row>
-        <v-col cols="3">
-      <label class="label">Sobrenome:</label>
-    </v-col>
-        <v-col cols="7">
-      <input  class="input" type="text" v-model="formData.lastName">
-    </v-col>
-      </v-row>
-    </div>
+    <v-container>
+      <v-form ref="form">
+        <v-row>
+          <v-col cols="12" sm="12">
+            <v-text-field v-model="formData.cpf" label="CPF"></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12" sm="12">
+            <v-text-field v-model="formData.name" label="Nome"></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12" sm="12">
+            <v-text-field v-model="formData.lastName" label="Sobrenome"></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12" sm="12">
+            <v-text-field v-model="formData.email" label="E-mail"></v-text-field>
+          </v-col>
+        </v-row>
+      </v-form>
 
-    <div class="boleto-information-container">
-      <v-row>
-        <v-col cols="3">
-      <label class="label">E-mail:</label>
-    </v-col>
-        <v-col cols="7">
-      <input class="input" type="text" v-model="formData.email">
-    </v-col>
-      </v-row>
-    </div>
-
+    </v-container>
   </div>
 </template>
 
@@ -59,13 +42,15 @@ export default {
       }
     };
   }
+
 };
 </script>
 <style scoped>
 .boleto-information-container {
   padding-bottom: 10px;
 }
-.label{
+
+.label {
   font-weight: bolder;
   padding-right: 10px;
   padding-bottom: 10px;
