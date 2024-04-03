@@ -25,15 +25,26 @@ Como Executar o Projeto Localmente
 https://github.com/stellamaia/payments-module.git
 ```
 
-## cd payments-module
+## Navegue até o diretório do projeto 
+
+```
+cd payments-module
+```
+
+###  Instale as dependências do projeto.
 
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+#### Compila e recarrega automaticamente para desenvolvimento
+
 ```
 npm run serve
 ```
 
+##### Abra o navegador e acesse a seguinte URL:
 
+```
+http://localhost:8080
+```
