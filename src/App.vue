@@ -2,7 +2,7 @@
   <v-app>
     <div>
       <NavBar />
-      <HelloWorld />
+      <PaymentCheckout />
     </div>
 
    
@@ -11,7 +11,7 @@
 
 <script>
 import NavBar from './components/NavBar.vue'
-import HelloWorld from './components/HelloWorld.vue'
+import PaymentCheckout from './components/PaymentCheckout.vue'
 export default {
   name: 'AppView',
   data() {
@@ -20,7 +20,7 @@ export default {
   },
   components: {
     NavBar,
-    HelloWorld
+    PaymentCheckout
   }
 
 }
